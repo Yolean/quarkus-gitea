@@ -19,6 +19,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.version>3.17.3</quarkus.version>
     <surefire-plugin.version>3.5.0</surefire-plugin.version>
+    <quarkus-openapi-generator.version>2.7.0-lts</quarkus-openapi-generator.version>
   </properties>
 
   <dependencyManagement>
