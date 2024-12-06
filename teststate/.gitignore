@@ -1,0 +1,6 @@
+gitea-data
+gitea-init/data/sessions
+gitea-init/home
+gitea-init/indexers
+gitea-init/jwt
+gitea-init/queues

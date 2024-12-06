@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+services:
+  gitea:
+    image: docker.io/gitea/gitea:1.22.4-rootless@sha256:e764bb13126fd1fc0c71843f9377ecf6d2784007daea43782150549b110e086f
+    ports:
+    - 13000:3000
+    volumes:
+    - ./teststate/gitea-data:/var/lib/gitea
+    - ./teststate/gitea-init:/var/lib/gitea-init
+    - ./teststate/gitea-etc:/etc/gitea
+    environment:
+    - DISABLE_SSH=true
+    entrypoint:
+    - /bin/bash
+    - -cex
+    - |
+      # cp -av /var/lib/gitea-init/* /var/lib/gitea/
+      # chown -R 1000 /var/lib/gitea/*
+      # crane config gitea/gitea:latest-rootless | jq -r '.config.Entrypoint | join(" ")'
+      /usr/bin/dumb-init -- /usr/local/bin/docker-entrypoint.sh
+
+# apitest
+# APItest1
+# http://localhost:13000/apitest/test1
+# fa8ba4c74e7969bcf5be39e39ccc89ab8cb8e880
