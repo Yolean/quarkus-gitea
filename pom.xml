@@ -22,6 +22,17 @@
     <quarkus-openapi-generator.version>2.7.0-lts</quarkus-openapi-generator.version>
   </properties>
 
+  <distributionManagement>
+    <snapshotRepository>
+      <id>gitlocal</id>
+      <url>file://snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>gitlocal</id>
+      <url>file://releases</url>
+    </repository>
+  </distributionManagement>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
