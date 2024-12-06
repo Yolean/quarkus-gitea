@@ -6,24 +6,27 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import io.quarkus.logging.Log;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Priorities;
 import jakarta.ws.rs.client.ClientRequestContext;
 import jakarta.ws.rs.client.ClientRequestFilter;
-import jakarta.ws.rs.core.HttpHeaders;
 
 import jakarta.annotation.Priority;
 
 @Priority(Priorities.AUTHENTICATION)
 @RequestScoped
-public class GiteaAuthFilter implements ClientRequestFilter {
+public class GiteaClientRequestFilter implements ClientRequestFilter {
 
   @ConfigProperty(name = "quarkus.rest-client.gitea.api-key")
   String apiKey;
 
+  @Inject
+  GiteaAuth auth;
+
   @Override
   public void filter(ClientRequestContext requestContext) throws IOException {
     if (Log.isDebugEnabled()) Log.debug("gitea " + requestContext.getMethod() + " " + requestContext.getUri());
-    requestContext.getHeaders().add(HttpHeaders.AUTHORIZATION, "token " + apiKey);
+    auth.filter(requestContext);
   }
 
 }
